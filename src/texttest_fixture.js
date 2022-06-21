@@ -15,19 +15,13 @@ const items = [
   new Item("Conjured Mana Cake", 3, 6),
 ];
 //take the argument node filename.js argv if not declare 2
-//const days = Number(process.argv[2]) || 1;
-const days = 30;
+const days = Number(process.argv[2]) || 30;
 const gildedRose = new Shop(items);
-let result ;
-//console.log("OMGHAI!");
 
+console.log("OMGHAI!");
 for (let day = 0; day < days; day++) {
-  console.log('************************************');
-  //console.log(`\n-------- day ${day} --------`);
-  ///console.log("name, sellIn, quality");
-  //items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-  result = gildedRose.updateQuality();
-  console.log('result : ',result);
-  //console.log('length : ',result.length);
-  console.log('************************************');
+  console.log(`\n-------- day ${day} --------`);
+  console.log("name, sellIn, quality");
+  items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
+  gildedRose.updateQuality();
 }
