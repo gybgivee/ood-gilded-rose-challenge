@@ -1,63 +1,25 @@
 
 class Shop {
+
+    #legendaryItem = ['Sulfuras, Hand of Ragnaros'];
+    #specialsItem = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'];
+    #conjured = ['Conjured Mana Cake'];
+
     constructor(items = []) {
         this.items = items;
     }
     updateQuality() {
-        const legendaryItem = ['Sulfuras, Hand of Ragnaros']
-        const specialsItem = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert']
+
         for (let i = 0; i < this.items.length; i++) {
+
             /* *********************1 : Set quality************************* */
-            //Brie
-            if (this.items[i].name === specialsItem[0]) {
+            this.items[i].quality = this.setQualityBeforeBBF(this.items[i]);
 
-                this.items[i].quality = this.BrieQuality(this.items[i].quality);
-
-            }//Backstage
-            else if (this.items[i].name == specialsItem[1]) {
-
-                this.items[i].quality = this.BackStageQuality(this.items[i].sellIn, this.items[i].quality);
-            }
-            else {
-                /*---------------------Set quality normal---------------------- */
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name != legendaryItem[0]) {
-                        this.items[i].quality = this.items[i].quality - 1;
-                    }
-                }
-            }
             /* *********************2 :update SellIn  ************************* */
-            //Every Item execpt legendaryItem
-            if (this.items[i].name != legendaryItem[0]) {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
-            }
+            this.items[i].sellIn = this.updateSellIn(this.items[i]);
+
             /* *********************3 :set quality from sellIn condition ************************* */
-            //set quality after out of date
-            if (this.items[i].sellIn < 0) {
-                  //Backstage passes
-                  if(this.items[i].name === specialsItem[1]){
-                    console.log('name ',this.items[i].name);
-                    this.items[i].quality = this.items[i].quality - this.items[i].quality;
-                  }
-                  //Brie
-                  else if (this.items[i].name === specialsItem[0]){
-                    if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1;
-                      }
-                  }
-                  //normal item
-                  else{
-                    
-                      if (this.items[i].quality > 0) {
-                        if (this.items[i].name != legendaryItem[0]) {
-                          this.items[i].quality = this.items[i].quality - 1;
-                        }
-                      }
-                    
-                  } 
-                  
-                
-            }
+            this.items[i].quality = this.setQualityAfterBBF(this.items[i]);
 
         }
 
@@ -72,8 +34,17 @@ class Shop {
         }
         return updateQuality;
     }
+    ConjuredQuality(quality) {
+
+        let updateQuality = quality;
+
+        if (quality < 50) {
+            updateQuality += 2;
+        }
+        return updateQuality;
+    }
     BackStageQuality(sellIn, quality) {
-        console.log('updateQuality ', sellIn, quality);
+        //console.log('updateQuality ', sellIn, quality);
         let updateQuality = quality;
         if (quality < 50) {
 
@@ -90,32 +61,68 @@ class Shop {
             }
 
         }
-        console.log('updateQuality ', updateQuality);
+        //console.log('updateQuality ', updateQuality);
 
         return updateQuality;
 
     }
-    setQualityBeforeBBF(item){
-        const legendaryItem = ['Sulfuras, Hand of Ragnaros']
-        const specialsItem = ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert']
-         //Brie
-         if (item.name === specialsItem[0]) {
+    setQualityBeforeBBF(item) {
+        let updateQuality = item.quality;
 
-            item.quality = this.BrieQuality(item.quality);
+        //Brie
+        if (item.name === this.#specialsItem[0]) {
+
+            updateQuality = this.BrieQuality(item.quality);
 
         }//Backstage
-        else if (item.name == specialsItem[1]) {
+        else if (item.name == this.#specialsItem[1]) {
 
-            item.quality = this.BackStageQuality(item.sellIn, item.quality);
+            updateQuality = this.BackStageQuality(item.sellIn, item.quality);
         }
         else {
-            /*---------------------Set quality normal---------------------- */
+            //set quality normal
             if (item.quality > 0) {
-                if (item.name != legendaryItem[0]) {
-                    item.quality = item.quality - 1;
+                if (item.name != this.#legendaryItem[0]) {
+                    updateQuality = item.quality - 1;
                 }
             }
         }
+        return updateQuality;
+    }
+    setQualityAfterBBF(item) {
+
+        //set quality after out of date
+        let updateQuality = item.quality;
+
+        if (item.sellIn < 0) {
+           
+            //Brie
+            if (item.name === this.#specialsItem[0]) {
+                updateQuality = this.BrieQuality(item.quality);
+            } //Backstage passes
+            else if (item.name === this.#specialsItem[1]) {
+                //updateQuality = item.quality - item.quality;
+                updateQuality =  0;
+            }
+            //normal item
+            else {
+
+                if (item.quality > 0) {
+                    if (item.name != this.#legendaryItem[0]) {
+                        updateQuality = item.quality - 1;
+                    }
+                }
+            }
+        }
+        return updateQuality;
+    }
+    updateSellIn(item) {
+        let updateSellIn = item.sellIn;
+        //Every Item execpt #legendaryItem
+        if (item.name != this.#legendaryItem[0]) {
+            updateSellIn = item.sellIn - 1;
+        }
+        return updateSellIn;
     }
 }
 module.exports = Shop;
