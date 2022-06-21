@@ -101,7 +101,6 @@ class Shop {
                 updateQuality = this.BrieQuality(item.quality);
             } //Backstage passes
             else if (item.name === this.#specialsItem[1]) {
-                //updateQuality = item.quality - item.quality;
                 updateQuality =  0;
             }
             //normal item
