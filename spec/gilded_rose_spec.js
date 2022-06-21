@@ -14,8 +14,6 @@ describe("Gilded Rose", function () {
       new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
       new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-
-      // This Conjured item does not work properly yet
       new Item("Conjured Mana Cake", 3, 6),
     ];
   })
@@ -43,7 +41,7 @@ describe("Gilded Rose", function () {
           sellIn: 4,
           quality: 50
         },
-        { name: 'Conjured Mana Cake', sellIn: 2, quality: 5 }
+        { name: 'Conjured Mana Cake', sellIn: 2, quality: 4 }
       ]
     const days = 1;
     const gildedRose = new Shop(items);
@@ -80,7 +78,7 @@ describe("Gilded Rose", function () {
           sellIn: 3,
           quality: 50
         },
-        { name: 'Conjured Mana Cake', sellIn: 1, quality: 4 }
+        { name: 'Conjured Mana Cake', sellIn: 1, quality: 2 }
       ];
       const days = 2;
       const gildedRose = new Shop(items);

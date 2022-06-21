@@ -34,15 +34,7 @@ class Shop {
         }
         return updateQuality;
     }
-    ConjuredQuality(quality) {
-
-        let updateQuality = quality;
-
-        if (quality < 50) {
-            updateQuality += 2;
-        }
-        return updateQuality;
-    }
+   
     BackStageQuality(sellIn, quality) {
         //console.log('updateQuality ', sellIn, quality);
         let updateQuality = quality;
@@ -80,9 +72,14 @@ class Shop {
             updateQuality = this.BackStageQuality(item.sellIn, item.quality);
         }
         else {
-            //set quality normal
+        
+            //conjured item
             if (item.quality > 0) {
-                if (item.name != this.#legendaryItem[0]) {
+                if(item.name === this.#conjured[0]){
+                    updateQuality = item.quality - 2;
+                }
+                //normal
+                else if (item.name != this.#legendaryItem[0]) {
                     updateQuality = item.quality - 1;
                 }
             }
@@ -103,13 +100,18 @@ class Shop {
             else if (item.name === this.#specialsItem[1]) {
                 updateQuality =  0;
             }
-            //normal item
             else {
 
                 if (item.quality > 0) {
-                    if (item.name != this.#legendaryItem[0]) {
+                    //conjured item
+                    if(item.name === this.#conjured[0]){
+                        updateQuality = item.quality - 2;
+                    }
+                    //normal item
+                    else if (item.name != this.#legendaryItem[0]) {
                         updateQuality = item.quality - 1;
                     }
+                   
                 }
             }
         }
