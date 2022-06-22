@@ -1,6 +1,6 @@
-let Shop = require('../src/shop');
-let Item = require('../src/item');
-let Inventory = require('../src/inventory');
+let Shop = require('../src/singleClass/shop');
+let Item = require('../src/singleClass/item');
+let Inventory = require('../src/singleClass/inventory');
 describe("Gilded Rose", function () {
   let items;
 
@@ -101,7 +101,7 @@ describe("Gilded Rose", function () {
       {
         name: 'Backstage passes to a TAFKAL80ETC concert',
         sellIn: 8,
-        quality: 29
+        quality: 30
       },
       {
         name: 'Backstage passes to a TAFKAL80ETC concert',
