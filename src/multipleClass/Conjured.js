@@ -1,7 +1,8 @@
 const Item = require('./item.js');
+
 class Conjured extends Item{
 
-    Quality() {
+    getQuality() {
         this.sellIn -= 1;
         if (this.quality > 0) {
             this.quality -= 2;

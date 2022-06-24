@@ -1,7 +1,7 @@
 const Item = require('./item.js');
 class Legendary extends Item{
 
-    Quality() {
+    getQuality() {
         return  {quality:this.quality,sellIn:this.sellIn};;
     }
 }

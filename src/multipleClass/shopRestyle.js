@@ -11,7 +11,7 @@ class NewShop {
 
         let update;
         for (let i = 0; i < this.items.length; i++) {
-            update = this.items[i].Quality();
+            update = this.items[i].getQuality();
             this.items[i].quality = update.quality;
             this.items[i].sellIn= update.sellIn;
 

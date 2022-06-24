@@ -2,7 +2,7 @@ const Item = require('./item.js');
 class Backstage extends Item{
     #qualityLimit = 50;
 
-    Quality() {
+    getQuality() {
         let updateQuality = this.quality;
         this.sellIn -= 1;
 

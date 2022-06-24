@@ -2,7 +2,7 @@ const Item = require('./item.js');
 class Brie extends Item{
     #qualityLimit = 50;
 
-    Quality() {
+    getQuality() {
         this.sellIn -= 1;
         if (this.quality < this.#qualityLimit) {
         if(this.sellIn < 0){
